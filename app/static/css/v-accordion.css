@@ -1,0 +1,33 @@
+v-accordion {
+  display: block; }
+
+v-pane {
+  display: block; }
+  v-pane.is-expanded > v-pane-content > div {
+    display: visible; }
+  v-pane[disabled] > v-pane-header {
+    opacity: 0.6;
+    pointer-events: none; }
+
+v-pane-header {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  outline: none; }
+  v-pane-header:focus {
+    outline: none; }
+  v-pane-header > div {
+    display: block; }
+
+v-pane-content {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  max-height: 0px; }
+  v-pane-content > div {
+    visibility: none; }
+

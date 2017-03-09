@@ -1,0 +1,109 @@
+{% raw %}
+<div ng-controller="StatusListVisualisationCtrl">
+	<h1 class="text-center" ng-show="noResults">
+		<br><br><br>
+		No results loaded yet...
+		<br>
+		(or no match)
+		<br><br><br>
+		<a class="btn btn-primary btn-lg" href="/#/search/search_status">Goto Search</a>
+	</h1>
+	<div class="text-center" ng-show="state.loading && !noResults">
+		</br></br></br></br></br></br></br></br></br>
+		<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+		</br></br></br></br></br>
+	</div>
+	<div ng-hide="state.loading || noResults">
+		<legend>Results found: {{state.trueTotalItems}}</legend>
+		<div class="row">
+			<div class="col-sm-4">
+				<!--button class="btn btn-default" ng-click="orderBy('name')">
+					Name
+					<span class="sortorder" ng-show="state.orderBy === 'name'" ng-class="{reverse:state.reverse}"></span>
+				</button-->
+				<button class="btn btn-default" ng-click="orderBy('date')">
+					Date
+					<span class="sortorder" ng-show="state.orderBy === 'date'" ng-class="{reverse:state.reverse}"></span>
+				</button>
+			</div>
+			
+			<div class="col-sm-8 text-right">
+				<button class="btn btn-default" ng-click="toggleSave = true" ng-hide="toggleSave">
+					Save results
+				</button>
+				<button class="btn btn-default" ng-click="selectAllStatus()" ng-show="toggleSave">
+					Select all
+				</button>
+				<button class="btn btn-primary" ng-click="saveAsEvent()" ng-show="toggleSave">
+					Save as event
+				</button>
+				<button class="btn btn-primary" ng-click="toJson()" ng-show="toggleSave">
+					Download to Json
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1" ng-include="'pagination'"></div>
+			<div class="col-sm-12">
+				<uib-accordion close-others="false">
+					<uib-accordion-group ng-repeat="status in state.statusList" is-open="true">
+						<uib-accordion-heading>
+							<span ng-bind-html="status.highlight['user_simple.name'] != undefined ? status.highlight['user_simple.name'][0] : status._source.user_simple.name | linkyWithHtml"></span>
+						</uib-accordion-heading>
+						<h4 class="text-right" ng-show="toggleSave" ng-click="selectStatus(status)">
+							Select for download
+							<switch class="btn btn-default" ng-model="status.isSelected" class="green"></switch>
+						</h4>
+						<em class="col-sm-6">{{status._type == "status" ? "Status": "Comments"}} posted at: {{status._source.created_at}}:</em>
+						<p class="col-sm-6 text-right">rate: {{status.relevance}}</p>
+						<p class="col-sm-12" ng-bind-html="status.highlight.text != undefined ? status.highlight.text[0] : status._source.text | linkyWithHtml"></p>
+						<div class="text-right">
+							<a class="btn btn-default" href="/#/data_analysis/user_analysis" ng-click="visualizeUser(status._source.user_simple.user_id)">See user profile</a>
+							<a class="btn btn-primary" href="/#/data_analysis/status_analysis" ng-click="visualize(status)">More</a>
+						</div>
+					</uib-accordion-group>
+				</uib-accordion>
+			</div>
+			<div class="col-sm-10 col-sm-offset-1" ng-include="'pagination'"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/ng-template" id="saveAsEventModal.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Save results as event</h3>
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="form-group">
+			<label>Name:</label>
+			<input type="text" class="form-control">
+		</div>
+		<div class="form-group">
+			<label>Description:</label>
+			<textarea class="form-control" rows="5"></textarea>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-lg btn-primary" type="button" ng-click="save()">Save</button>
+	</div>
+</script>
+
+<script type="text/ng-template" id="toJsonModal.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Download to JSON</h3>
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">	
+		<div class="row">
+			Select field you want to download:
+			</br>
+			<label class="checkbox" ng-repeat="field in fields">
+				<input type="checkbox" ng-model="field.isSelected"></input>
+				{{field.label}}
+			</label>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-lg btn-primary" type="button" ng-click="download()">Download</button>
+	</div>
+</script>
+{% endraw %}

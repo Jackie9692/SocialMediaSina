@@ -1,0 +1,102 @@
+{% raw %}
+<div ng-controller="SearchUserCtrl">
+	<div class="row">
+		<div class="col-sm-9">
+			<legend>General Information</legend>
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="control-label col-sm-2">Name:</label>
+					<div class="col-sm-8"><input class="form-control" ng-model="state.name"></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Location:</label>
+					<div class="col-sm-8"><input class="form-control" ng-model="state.location"></input></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Followers:</label>
+					<div class="col-sm-10">
+						<div class="input-group col-sm-3">
+							<span class="input-group-btn">
+								<button class="btn btn-secondary" type="button" ng-click="state.greaterThan = !state.greaterThan">{{state.greaterThan? "<" : ">"}}</button>
+							</span>
+							<input type="number" class="form-control" ng-model="state.followers">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-sm-3">
+			<legend>Rate</legend>
+			<div class="col-sm-offset-6" style="height: 150px;">
+			<rzslider rz-slider-model="state.rate.minValue" rz-slider-high="state.rate.maxValue"
+          rz-slider-options="state.rate.options"></rzslider>
+        	</div>
+		</div>
+	</div>
+	</br>
+	<div class="row">
+		<div class="col-sm-6">
+			<legend>Account category</legend>
+			<div class="col-sm-offset-1">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.category.enterpriseIsSelected"></input>
+						Enterprise
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.category.weMediaIsSelected"></input>
+						We Media / Experts
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.category.industryAllianceIsSelected"></input>
+						Industry Alliance
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.category.popularNewsMediaIsSelected"></input>
+						Popular news Media
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.category.normalIsSelected"></input>
+						Normal
+					</label>
+				</div>
+			</div>
+			<br>
+		</div>
+		<div class="col-sm-6">
+			<legend>Gender</legend>
+			<div class="col-sm-offset-1">
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="state.gender" value="both"></input>
+						Male & Female
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="state.gender" value="male"></input>
+						Male
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="state.gender" value="female"></input>
+						Female
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row text-right">
+		<a class="btn btn-primary btn-lg" href="/#/search/user_list_visualisation" ng-click="search()">Search</a>
+	</div>
+</div>
+{% endraw %}

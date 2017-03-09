@@ -1,0 +1,13 @@
+{% raw %}
+<div class="row">
+	<ul class="pager text col-sm-1">
+    	<li ng-class="{ 'disabled': previous.isDisabled}"><a href="" ng-click="previous.click()">Previous</a></li>
+  	</ul>
+  	<div class="text-center col-sm-10" ng-click"test()">
+	    <uib-pagination items-per-page="itemsPerPage" total-items="state.totalItems" ng-model="state.page" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" direction-links="false"></uib-pagination>
+	</div>
+	<ul class="pager col-sm-1">
+    	<li ng-class="{ 'disabled': next.isDisabled}"><a href="" ng-click="next.click()">Next</a></li>
+  	</ul>
+</div>
+{% endraw %}

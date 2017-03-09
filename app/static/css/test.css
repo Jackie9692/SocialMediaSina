@@ -1,0 +1,56 @@
+.menu {
+    font-size: 20px;
+}
+
+
+//
+.sub-menu {
+    font-size: 18px;
+}
+
+li.active.sub-menu>a, li.active.sub-menu>a:focus, li.active.sub-menu>a:hover {
+    color: #337ab7;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #337ab7;
+}
+
+.keywords {
+	color: #ff0000;
+}
+
+/* menu navigation */
+.menu>.panel-heading {
+    background-color: transparent;
+    padding: 0 0;
+
+}
+.menu .panel-body {
+    padding: 0 0;
+}
+
+.panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {
+    border: none;
+}
+
+.menu {
+    border: none;
+    -webkit-box-shadow: none;
+}
+
+a.accordion-toggle:active, a.accordion-toggle:hover {
+    outline: 0;
+    text-decoration: none;
+}
+
+
+/* content scrolable */
+.h-scroll {
+    max-height: 85vh; /* %-height of the viewport */
+    overflow-y: auto;
+}
+
+header {
+    max-height: 15vh;
+}
+

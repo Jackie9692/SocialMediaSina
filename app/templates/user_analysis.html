@@ -1,0 +1,65 @@
+{% raw %}
+<div ng-controller="UserAnalysisCtrl">
+	<h1 class="text-center" ng-show="state.user == undefined">
+		<br><br><br>
+		No results loaded yet...
+		<br><br><br>
+		<a class="btn btn-primary btn-lg" href="/#/search/search_user">Goto Search</a>
+	</h1>
+	<div ng-hide="state.user == undefined">
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="row">
+					<p class="col-sm-6"><label>Name:</label> {{state.user.name}}</p>
+				</div>
+				<div class="row">
+					<p class="col-sm-6"><label>Alias:</label> {{state.user.screen_name}}</p>
+					<p class="col-sm-6"><label>Gender:</label> {{state.user.gender}}</p>
+				</div>
+				<div class="row">
+					<p class="col-sm-6"><label>Description:</label></p>
+					<p class="col-sm-12 text-justify" ng-bind-html="state.user.description | linkyWithHtml"></p>
+				</div>
+				<div class="text-right">
+					<a ng-href="{{'http://weibo.com/' + state.user.profile_url}}"  target="_blank" class="btn btn-info btn-sm" ng-class="{ 'disabled': state.user.profile_url == undefined }"><i class="fa fa-weibo" style="font-size:18px;" aria-hidden="true"></i> Weibo</a>
+					<a ng-href="{{state.user.url}}"  target="_blank" class="btn btn-info btn-sm" ng-class="{ 'disabled': state.user.url == undefined }">Website</a>
+				</div>
+			</div>
+			<div class="col-sm-4 text-center">
+				<img src="/static/image/china.svg" class="img-responsive img-thumbnail" alt="Location">{{state.user.location}}
+			</div>
+			<div class="col-sm-12"><hr></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="row">
+					<p class="col-sm-6"><label>Statuses:</label> {{state.user.statuses_count}}</p>
+					<p class="col-sm-6"><label>Lang:</label> {{state.user.lang}}</p>
+				</div>
+				<div class="row">
+					<p class="col-sm-6"><label>Followers:</label> {{state.user.followers_count}}</p>
+					<p class="col-sm-6"><label>Created at:</label> {{state.user.created_at}}</p>
+				</div>
+				<div class="row">
+					<p class="col-sm-6"><label>Friends:</label> {{state.user.friends_count}}</p>
+				</div>
+				<div class="row">
+					<p class="col-sm-6"><label>Verified:</label> {{state.user.verified_reason}}</p>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="text-center">
+					<strong>{{state.user.category}} account</strong>
+					</br></br>
+					<span class="rate col-sm-4 col-sm-offset-4" ng-class="{ 'negative': state.user.score < 30 , 'positive': state.user.score > 70}">{{state.user.score}}</span>
+					</br></br>
+				</div>
+				<!--div class="text-right">
+					<button type="button" class="btn btn-danger">Ban User</button>
+				</div-->
+			</div>
+		</div>
+		<a class="btn btn-primary btn-lg" href="/#/search/status_list_visualisation" ng-click="search()">See Status and Comments</a>
+	</div>
+</div>
+{% endraw %}

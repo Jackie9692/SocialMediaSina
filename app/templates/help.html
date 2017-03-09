@@ -1,0 +1,370 @@
+{% raw %}
+<legend>About</legend>
+<p class="text-justify">
+	Weibo Sensor is an application developed by the collaboration of UTRC China and TONGJI University. This application aims to automatically retrieve data from Sina Weibo, store and process these data, in order to finally display them with advanced visualization options. The collected are the following: statuses (Weibo microposts), comments, account profiles.
+</p>
+<br><br>
+<legend>Layout</legend>
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<img src="/static/image/layout.jpg" class="img-responsive" alt="layout">
+	</div>
+</div>
+<div class="text-center">
+	<i>User interface layout</i>
+</div>
+<ol type="A">
+	<li class="text-justify">UTRC Logo</li>
+	<li class="text-justify">Navigation Bar</li>
+	<ol>
+		<li class="text-justify">Menu</li>
+		<li class="text-justify">Current Menu</li>
+		<li class="text-justify">Submenu</li>
+		<li class="text-justify">Current Submenu</li>
+	</ol>
+	<li class="text-justify">Current page Title</li>
+	<ol start="5">
+		<li class="text-justify">Corresponding menu</li>
+		<li class="text-justify">Corresponding submenu</li>
+	</ol>
+	<li class="text-justify">Page information</li>
+</ol>
+
+<br><br>
+<legend>Functionalities</legend>
+This section presents an overview of the functionalities offered by the application
+
+<div class="col-sm-11 col-sm-offset-1">
+	<legend>1. Home</legend>
+	<p class="text-justify">
+		When you connect to the application, you are redirected to the home page. This page displays some of the recent statistics, about the retrieved data, thanks to three different modules.
+	</p>
+	<div class="col-sm-11 col-sm-offset-1">
+		<p class="text-justify">
+			<strong>Last statuses retrieved</strong>: display the three last statuses (from the past 30 days) which contains at least one of the preset keywords combinations. By default will display every statuses which contains电梯or 扶梯. For each status the following information are displayed:
+		</p>
+		<ul>
+			<li class="text-justify">Account name</li>
+			<li class="text-justify">Publication date</li>
+			<li class="text-justify">Status’ message</li>
+			<li class="text-justify">Link to the account profile information</li>
+			<li class="text-justify">Link to get more information about the status</li>
+		</ul>
+		<p class="text-justify">
+			<strong>Amount of statuses retrieved</strong>: show the total amount of statuses retrieved in the past 30 days (comments are not included). This amount is compared to a global goal on a dashboard which allow to highlight the recent activity on the social media.
+		</p>
+		<p class="text-justify">
+			<strong>Topics relative activity</strong>: compare the relative activity (amount of statuses published) between the different preset topics on a doughnut chart. By default the topics are generated as followed:
+		</p>
+		<ul>
+			<li class="text-justify">事故: contains事故 and (电梯 or扶梯)</li>
+			<li class="text-justify">安全: contains安全and (电梯 or扶梯)</li>
+			<li class="text-justify">维保: contains维保and (电梯 or扶梯)</li>
+			<li class="text-justify">问题: contains问题and (电梯 or扶梯)</li>
+			<li class="text-justify">服务: contains服务and (电梯 or扶梯)</li>
+		</ul>
+	</div>
+
+	<br><br><br>
+	<legend>2. Login/Logout</legend>
+	<p class="text-justify">
+		In order to be able to access the other menu, you should first log into the application, thus you should first click on the login icon (in the navigation bar). A popup will appear and you will be able to input your user name and password. Then, if both are correct, you will be able to access all the content of the application.
+	</p>
+	<p class="text-justify">
+		When you have finish to use the application you can logout by clicking on the logout icon (in the navigation bar).
+	</p>
+
+	<br><br>
+	<legend>3. Search</legend>
+	<p class="text-justify">
+		Searching data is one of the main functionality of the application. You can first chose the data you want to search by selecting the corresponding submenu, then you can input several search parameters and finally chose how you want to display the results.
+	</p>
+
+	<div class="col-sm-11 col-sm-offset-1">
+		<strong>3.1 Quick Search</strong>
+		<p class="text-justify">
+			This searching method allow to input one unique search parameter: keywords (to input several keyword they should be separated by a space “ ”). It will look for every statuses or comments which contains all of the keywords in the status/comment text and account name. The search results will be limited to the data published in past 30 days. Once the search button is pressed, result will be display in a visualization list.
+		</p>
+		<a href="/#/search/quick_search">Go to Quick Search</a>
+		<br><br>
+		<strong>3.2 Search Status & Comment</strong>
+		<p class="text-justify">
+			As indicated, this second search method is used to search statuses and comments. Contrary to the quick search method, several search parameters can be input:
+		</p>
+		<ul>
+			<li class="text-justify">
+				Keywords: allow to input keywords. Just as for quick search, several keyword can be input, they should be separated by a space “ ”. Every status or comment obtained will contain all of the keywords in the status/comment text and account name.
+				<br>
+				Input example: “电梯  安全”.
+			</li>
+			<li class="text-justify">
+				Location: allow to input one keyword relative to a location. Will search only statuses and comments which account location contain this keyword. 
+				<br>
+				Input example: “上海”.
+			</li>
+			<li class="text-justify">
+				Mentions: allow to input one account name. Will search only statuses and comments which contain a reference to this account @USER. Warning: do not write the “@”.
+				<br>
+				Input example: “奥的斯”.
+			</li>
+			<li class="text-justify">
+				Hashtags: allow to input one hashtag. Will search only statuses and comments which contain this #hashtag#. Warning: do not write the “#”.
+				<br>
+				Input example: “电梯”.
+			</li>
+			<li class="text-justify">
+				Time period: allow to select two date. Will search only statuses and comments which were published in this time period. When you click on the calendar icon a pop up which allow to pick a date is opened. Warning: the largest will be this time period the longer it will take to obtain the results.
+				<br>
+				By default the time period is set on the last 30 days.
+			</li>
+			<li class="text-justify">
+				Status feeling: allow to select between three sentiments. Will search only statuses and comments which correspond to the selected sentiments. If every sentiment or no sentiment are selected this parameter will not be applied.
+			</li>
+			<li class="text-justify">
+				Source: allow to select between five categories: Weibo website, IPhone, Android, Windows Phone, Others. Will search only statuses and comments which correspond to the selected categories. If every category or no category are selected this parameter will not be applied. Warning: this parameter is not fully implemented yet, thus results will probably not be accurate.
+			</li>
+			<li class="text-justify">
+				Status only: allow to select to only search statuses. If selected no comments will be obtained.
+				<br>
+				By default is not selected.
+			</li>
+			<li class="text-justify">
+				Topics: not implemented yet.
+			</li>
+			<li class="text-justify">
+				Events: not implemented yet.
+			</li>
+		</ul>
+		<p class="text-justify">Results can be displayed in a visualization list or as statistics.</p>
+		<a href="/#/search/search_status">Go to Search Status & Comment</a>
+
+		<br><br>
+		<strong>3.3 Search user</strong>
+		<p class="text-justify">
+			This third method is used to search account profiles information. The following parameters can be applied:
+		</p>
+		<ul>
+			<li class="text-justify">
+				Name: allow to input a keyword. Will search only accounts which name contain this keywords. 
+				<br>
+				Input example: “电梯”.
+			</li>
+			<li class="text-justify">
+				Location: allow to input one keyword relative to a location. Will search only accounts which location contain this keyword. 
+				<br>
+				Input example: “上海”.
+			</li>
+			<li class="text-justify">
+				Followers: allow to input a number and select superior at“<” or inferior at “>” (click on the icon to switch between the two). Will search only accounts which total followers amount is superior/inferior at this number. 
+				<br>
+				Input example: “< 5000”.
+			</li>
+			<li class="text-justify">
+				Category: allow to select between several categories. Will search only accounts which correspond to the selected categories. If every category or no category are selected this parameter will not be applied.
+			</li>
+			<li class="text-justify">
+				Gender: allow to select between male, female or both. Will search only accounts which correspond to the selected gender.
+			</li>
+			<li class="text-justify">
+				Rate: not implemented yet.
+			</li>
+		</ul>
+		<p class="text-justify">Results will be displayed in a visualization list.</p>
+		<a href="/#/search/search_user">Go to Search User</a>
+
+		<br><br>
+		<strong>3.4 Search Event</strong>
+		<p class="text-justify">The last searching method, is used to search events. Several search parameters can be applied:</p>
+		<ul>
+			<li class="text-justify">
+				Keywords: allow to input keywords. Several keyword can be input, they should be separated by a space “ ”. Every event obtained will be linked to all of these keywords.
+				<br>
+				Input example: “电梯  安全”.
+			</li>
+			<li class="text-justify">
+				Location: allow to input one keyword relative to a location. Will search only events which location is linked to this keyword. 
+				<br>
+				Input example: “上海”.
+			</li>
+			<li class="text-justify">
+				Time period: allow to select two date. Will search only events which were published in this time period. When you click on the calendar icon a pop up which allow to pick a date is opened. Warning: the largest will be this time period the longer it will take to obtain the results.
+				<br>
+				By default the time period is set on the last 30 days. 
+			</li>
+		</ul>
+		<p class="text-justify">Results will be displayed in a visualization list.</p>
+		<a href="/#/search/search_event">Go to Search Event</a>
+	</div>
+
+	<br><br>
+	<legend>4. Statistics</legend>
+	<p class="text-justify">Statistics provide an efficient way to visualize several data in one single chart. This section introduce the four charts which have been implemented in the version 1.0 of the application. Future version should implement more way to visualize data.</p>
+	<div class="col-sm-11 col-sm-offset-1">
+		<strong>4.1 Time Statistics</strong>
+		<p class="text-justify">
+			This first chart provide a way to visualize the distribution of data on a period of time. By default it displays every statuses and comments published during the last 30 days, as shown <a href="/#/statistics/time_statistics">here</a>. Abscissa show the distribution of every days contained in the period of time targeted, and ordinate show the amount of statuses and comments for these days.
+		</p>
+		<p class="text-justify">
+			In order to display other data, you should use the Search Status and Comments page. From there several parameters can be applied, and then, instead of pressing the Search button, you should press Statistics and select Time option.
+		</p>
+		<p class="text-justify">
+			For example you can generate a chart with only data which contain 电梯, are negative and have been published on a specific period of time.
+		</p>
+		<br><br>
+		<strong>4.2 Sentiment Statistics</strong>
+		<p class="text-justify">
+			Warning: In the version 1.0 comments’ sentiments are not calculated yet.
+		</p>
+		<p class="text-justify">
+			There is two chart which allow to visualize the distribution of sentiments on a period of time. By default they display every statuses and comments published during the last 30 days.
+		</p>
+		<p class="text-justify">
+			As shown <a href="/#/statistics/sentiment_statistics">here</a>, the first version displays the relative sentiment: difference between the amount of positive and negative statuses and comments, ignore neutral data. Abscissa show the distribution of every days contained in the period of time targeted, and ordinate show the amount of positive data, amount of negative data, and difference between these two amounts.
+		</p>
+		<p class="text-justify">
+			The second version displays every amount of data for each sentiment (negative, neuter, and positive). Abscissa show the distribution of every days contained in the period of time targeted, and ordinate show the amount of positive, neutral, and negative data. 
+		</p>
+		<p class="text-justify">
+			In order to display other data, you should use the Search Status and Comments page. From there several parameters can be applied, and then, instead of pressing the Search button, you should press Statistics and select Sentiment option.
+		</p>
+		<br><br>
+		<strong>4.3 Location Statistics</strong>
+		<p class="text-justify">
+			As shown <a href="/#/statistics/location_statistics">here</a>, this chart display the distribution of data among Chinese provinces. By default they display every statuses and comments published during the last 30 days. 
+		</p>
+		<p class="text-justify">
+			In order to display other data, you should use the Search Status and Comments page. From there several parameters can be applied, and then, instead of pressing the Search button, you should press Statistics and select Location option.
+		</p>
+	</div>
+
+	<br><br>
+	<legend>Data visualization and analysis</legend>
+	<div class="col-sm-11 col-sm-offset-1">
+		<strong>5.1 List of data visualization</strong>
+		<p class="text-justify">
+			After searching data, results are shown in a visualization page. Owing to the amount of data which may be displayed, the total amount of items on each page is limited. In order to show more items you should use the pagination bar. Each items will show a preview of the associated data (Status, comments, user account profiles, or events), and contain link to the associated analysis page (see bellow).
+		</p>
+		<p class="text-justify">
+			Statuses and comments visualization pages, have an additional feature which allow to save the data which are displayed: You should first click on Save results, then you should be able to select some of the item shown on the page (to select all in one click press on Select all on the top). Then you can chose to save this results as event or to directly download them as JSON (if download to JSON you can also select the field you want to collect).
+		</p>
+		<br><br>
+		<strong>5.2 Status analysis</strong>
+		<p class="text-justify">
+			This page is used to analyze both statuses and comments. Data are displayed as shown in the follwing picture (version is slightly different for comments):
+		</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<img src="/static/image/status_analysis.jpg" class="img-responsive" alt="status analysis">
+	</div>
+</div>
+<div class="col-sm-11 col-sm-offset-1">
+	<div class="col-sm-11 col-sm-offset-1">
+		<ol type="A">
+			<li class="text-justify">Type of data, Status or Comment</li>
+			<ul>
+				<li class="text-justify">Name of whom published the message and link to his profile.</li>
+				<li class="text-justify">Publication date</li>
+				<li class="text-justify">Text of the status/comment</li>
+				<li class="text-justify">Source of the status/comment (which device were used)</li>
+			</ul>
+			<li class="text-justify">General information</li>
+			<ul>
+				<li class="text-justify">Weibo: link to the corresponding Weibo page (disabled)</li>
+				<li class="text-justify">Reposts: show the list of the reposted message (if they have been retrieved)</li>
+				<li class="text-justify">Comments: show the list of the comments</li>
+				<li class="text-justify">In reply of: show the original status/comments (disabled if not)</li>
+				<li class="text-justify">Like: show the amount of like (does not link to any page)</li>
+			</ul>
+			<li class="text-justify">Link to other information</li>
+			<ul>
+				<li class="text-justify">Topic</li>
+				<li class="text-justify">Related events</li>
+				<li class="text-justify">Keywords</li>
+			</ul>
+			<li class="text-justify">Calculated data</li>
+			<ul>
+				<li class="text-justify">Location of the user profile when the message was posted</li>
+				<li class="text-justify">Map will show this location in future version</li>
+			</ul>
+			<li class="text-justify">Location</li>
+			<ul>
+				<li class="text-justify">Positive: score between 65 and 100</li>
+				<li class="text-justify">Neutral: score between 35 and 65</li>
+				<li class="text-justify">Negative: score between 0 and 35</li>
+			</ul>
+			<li class="text-justify">Sentiment</li>
+			<li class="text-justify">Estimate Geolocation, open a popup when pressed, will call some API to try to extract some location name from the text. This Feature is implemented as demonstration.</li>
+		</ol>
+		<br><br>
+		<strong>5.3 User analysis</strong>
+		<p class="text-justify">
+			This page is used to analyze user account profiles information. Data are displayed as shown in the follwing picture.
+		</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<img src="/static/image/user_analysis.jpg" class="img-responsive" alt="user analysis">
+	</div>
+</div>
+<div class="col-sm-11 col-sm-offset-1">
+	<div class="col-sm-11 col-sm-offset-1">
+		<ol type="A">
+			<li class="text-justify">Main information</li>
+			<li class="text-justify">Links</li>
+			<ul>
+				<li class="text-justify">Weibo link to this user profile page on Weibo</li>
+				<li class="text-justify">Website link to this user website (disabled if no link available)</li>
+			</ul>
+			<li class="text-justify">Location</li>
+			<li class="text-justify">Other information</li>
+			<li class="text-justify">Link to every statuses an comments published by this user</li>
+			<li class="text-justify">Account category of this user (may be inaccurate on this version)</li>
+			<li class="text-justify">User’s score (not implemented on this version)</li>
+		</ol>
+		<br><br>
+		<strong>5.4 Event analysis</strong>
+		<p class="text-justify">
+			This page is used to analyze events information. It will display the following information:
+		</p>
+		<ul>
+			<li class="text-justify">Name of this event</li>
+			<li class="text-justify">Description</li>
+			<li class="text-justify">Starting & stopping date</li>
+			<li class="text-justify">Location of this event</li>
+			<li class="text-justify">Keywords associated to this event</li>
+			<li class="text-justify">A link to visualize every related statuses and comments</li>
+		</ul>
+	</div>
+</div>
+<br><br>
+<legend>Advanced functionalities</legend>
+<div class="col-sm-11 col-sm-offset-1">
+	<legend>1 Manage</legend>
+	<p class="text-justify">
+		This version only implement the data cleaning management panel. This panel allow to visualize the cleaning tasks which are currently running and to add new tasks. In order to add a new tasks you should press the add button. Then, you will chose a name for this tasks, data will always come from the raw_data_db but you can select the destination database were your cleaning data will be saved. Yet the application only allow to clean by keywords, thus you should input a keyword combination. Finally you can chose when the task will be run, the current version allow only to use cyclic scheduling which can be triggered after a fix time period or at a specific time every day. You finally can create and start cleaning by pressing the final button.
+	</p>
+
+	<br><br>
+	<legend>2 Settings</legend>
+	<p class="text-justify">No settings are available. Future versions will allow to change some of the user interface settings such as:</p>
+	<ul>
+		<li class="text-justify">Change the keywords used to generated the home page chart</li>
+		<li class="text-justify">Modify the limitation on item per visualization page</li>
+	</ul>	
+</div>
+<br><br>
+<legend>Navigation</legend>
+<p class="text-justify">
+	This final part present this last figure which illustrate how to navigate inside the user interface. You will usually start from the searching page to visualize data or generate statistics.
+</p>
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<img src="/static/image/navigation.jpg" class="img-responsive" alt="navigation">
+	</div>
+</div>
+<br><br><br><br><br>
+
+{% endraw %}

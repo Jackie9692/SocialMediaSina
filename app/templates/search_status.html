@@ -1,0 +1,167 @@
+{% raw %}
+<div ng-controller="SearchStatusCtrl">
+	<div class="row">
+		<div class="col-sm-9">
+			<legend>General Information</legend>
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="control-label col-sm-2">Keywords:</label>
+					<div class="col-sm-8"><input class="form-control" ng-model="state.keywords"></input></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Location:</label>
+					<div class="col-sm-8"><input class="form-control" ng-model="state.location"></input></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Topics:</label>
+					<div class="col-sm-3">
+						<div class="btn-group" uib-dropdown auto-close="outsideClick">
+							<button type="button" class="btn btn-default" uib-dropdown-toggle>
+							Select topics <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+								<li role="menuitem"><a ng-click="selectAllTopic()" class="small">
+									Select/Unselect All
+								</a></li>
+								<li class="divider"></li>
+								<li role="menuitem" ng-repeat="topic in state.topicList"><a ng-click="topic.click()" class="small"><input type="checkbox" ng-model="topic.isSelected"/></input>&nbsp;{{topic.value}}</a></li>
+							</ul>
+						</div>
+					</div>
+					<label class="control-label col-sm-2">Events:</label>
+					<div class="col-sm-3"><input class="form-control" ng-model="state.events"></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Mentions:</label>
+					<div class="col-sm-3"><input class="form-control" ng-model="state.mentions"></div>
+					<label class="control-label col-sm-2">Hashtags:</label>
+					<div class="col-sm-3"><input class="form-control" ng-model="state.hashtags"></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">From:</label>
+					<div class="col-sm-3">
+						<div class="btn-group" uib-dropdown auto-close="outsideClick">
+							<button type="button" class="btn btn-default" uib-dropdown-toggle>
+							Select database <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+								<li role="menuitem" ng-repeat="db in state.dbList">
+									<a ng-click="state.selectedDb = db" class="small">
+										<input type="radio" ng-value="db" ng-model="state.selectedDb"/></input>&nbsp;{{db}}
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-sm-3">
+			<legend>Time period</legend>
+			<label class="control-label col-sm-12">From:</label>
+			<div>
+				<p class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="yy/MM/dd" ng-model="state.timePeriod.from" is-open="popup1IsOpen" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" on-open-focus="false" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="popup1IsOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</p>
+			</div>
+			<br>
+			<label class="control-label col-sm-12">To:</label>
+			<div>
+				<p class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="yy/MM/dd" ng-model="state.timePeriod.to" is-open="popup2IsOpen" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" on-open-focus="false" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="popup2IsOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</p>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-6">
+			<legend>Source</legend>
+			<div class="col-sm-offset-1">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.source.website"></input>
+						Weibo website
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.source.iphone"></input>
+						Iphone
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.source.android"></input>
+						Android
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.source.windowsPhone"></input>
+						Windows Phone
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.source.others"></input>
+						Others
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<legend>Status feeling</legend>
+			<div class="col-sm-offset-1">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.feelings.positive"></input>
+						Positive
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.feelings.neuter"></input>
+						Neuter
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="state.feelings.negative"></input>
+						Negative
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row text-right">
+		<h4>
+			Statuses Only 
+			<switch class="btn btn-default" ng-model="state.statusOnly" class="green"></switch>
+		</h4>
+	</div>
+	<div class="row text-right">
+		<div class="btn-group">
+			<div class="btn-group" uib-dropdown is-open="status.isopen">
+				<button id="single-button" type="button" class="btn btn-primary btn-lg" uib-dropdown-toggle ng-disabled="disabled">
+					Statistics <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+					<li role="menuitem"><a href="#/statistics/time_statistics" ng-click="showTimeStatistics()">Time</a></li>
+					<li role="menuitem"><a href="#/statistics/sentiment_statistics" ng-click="showSentimentStatistics()">Sentiment</a></li>
+					<li role="menuitem"><a href="#/statistics/location_statistics" ng-click="showLocationStatistics()">Location</a></li>
+					<li role="menuitem"><a href="#/statistics/keywords_statistics">Keywords</a></li>
+				</ul>
+			</div>
+			<a class="btn btn-primary btn-lg" href="/#/search/status_list_visualisation" ng-click="search()">Search</a>
+		</div>
+	</div>
+	<br><br><br><br><br><br><br>
+</div>
+{% endraw %}

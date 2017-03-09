@@ -1,0 +1,31 @@
+{% raw %}
+<div ng-controller="HomeCtrl">
+	<div class="col-sm-7">
+		<h3 class="text-primary">Last statuses retrieved</h3>
+		<br>
+		<div class="panel panel-info" ng-repeat="status in state.statusList">
+			<div class="panel-heading">
+				{{status.user_simple.name}}
+			</div>
+			<div class="panel-body">
+				<i>{{status.created_at}}</i>:
+				<p ng-bind-html="status.text | linkyWithHtml"></p>
+				<div class="text-right">
+					<a class="btn btn-default" href="/#/data_analysis/user_analysis" ng-click="visualizeUser(status._source.user_simple.user_id)">See user profile</a>
+					<a class="btn btn-primary" href="/#/data_analysis/status_analysis" ng-click="visualize(status)">More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-5 col-sm-offset-0">
+		<div class="row">
+			<h3 class="text-primary">{{state.pastMonthTotalRetrieved}} statuses retrieved <small><i>past 30 days</i></small></h3>
+			<div id="dashboard" style="height:300px"></div>
+		</div>
+		<div class="row">
+			<h3 class="text-primary">Topics <small><i>past 30 days</i></small></h3>
+			<div id="topicPie" style="height:300px"></div>
+		</div>
+	</div>
+</div>
+{% endraw %}

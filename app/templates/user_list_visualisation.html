@@ -1,0 +1,45 @@
+{% raw %}
+<div ng-controller="UserListVisualisationCtrl">
+	<h1 class="text-center" ng-show="noResults">
+		<br><br><br>
+		No results loaded yet...
+		<br>
+		(or no match)
+		<br><br><br>
+		<a class="btn btn-primary btn-lg" href="/#/search/search_user">Goto Search</a>
+	</h1>
+	<div class="text-center" ng-show="state.loading && !noResults">
+		</br></br></br></br></br></br></br></br></br>
+		<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+		</br></br></br></br></br>
+	</div>
+	<div ng-hide="state.loading || noResults">
+		<legend>Results found: {{state.trueTotalItems}}</legend>
+		<!--button class="btn btn-default" ng-click="orderBy('name')">
+			Name
+			<span class="sortorder" ng-show="state.orderBy === 'name'" ng-class="{reverse:state.reverse}"></span>
+		</button-->
+		<button class="btn btn-default" ng-click="orderBy('date')">
+			Date
+			<span class="sortorder" ng-show="state.orderBy === 'date'" ng-class="{reverse:state.reverse}"></span>
+		</button>
+		<div class="col-sm-10 col-sm-offset-1" ng-include="'pagination'"></div>
+		<div class="col-sm-12">
+			<uib-accordion close-others="false">
+				<uib-accordion-group ng-repeat="user in state.userList" is-open="true">
+					<uib-accordion-heading>
+						<span ng-bind-html="user.highlight.name != undefined ? user.highlight.name[0] : user._source.name | linkyWithHtml"></span>
+					</uib-accordion-heading>
+					<em class="col-sm-6">{{user._source.category}}:</em>
+					<p class="col-sm-6 text-right">rate: {{user.rate}}</p>
+					<p class="col-sm-12" ng-bind-html="user._source.description | linky"></p>
+					<div class="text-right">
+						<a class="btn btn-primary" href="/#/data_analysis/user_analysis" ng-click="visualize(user._source)">More</a>
+					</div>
+				</uib-accordion-group>
+			</uib-accordion>
+		</div>
+		<div class="col-sm-10 col-sm-offset-1" ng-include="'pagination'"></div>
+	</div>
+</div>
+{% endraw %}

@@ -1,0 +1,127 @@
+{% raw %}
+<div ng-controller="DataCleaningCtrl">
+	<h1 ng-show="state.hasNoData">No data cleaning tasks are defined</h1>
+	<table class="table table-hover table-striped" ng-hide="state.hasNoData" id="cleaningTasksTable">
+		<thead>
+			<tr>
+				<th>Task Name</th>
+				<th>Source DB</th>
+				<th>Destination DB</th>
+				<th>Cleaning Strategy</th>
+				<th>Type</th>
+				<th>State</th>
+				<th>Created Time</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="task in state.taskList">
+			<td>{{ task.name}}</td>
+			<td>{{ task.sourceDb }}</td>
+			<td>{{ task.destinationDb }}</td>
+			<td>{{ task.cleaningStrategy }}</td>
+			<td>{{ task.taskType }}</td>
+			<td>{{ task.taskState }}</td>
+			<td>{{ task.createdTime }}</td>
+			<td><a class="btn btn-default btn-sm" ng-click="taskModal(task)">More</a></td>
+		</tr>
+	</table>
+	<div class="text-right">
+		<button class="btn btn-primary btn-lg" ng-click="taskModal()">New Task</button>
+	</div>
+</div>
+
+<script type="text/ng-template" id="new_cleaning_task.html">
+	<div class="modal-header">
+		<h3 class="modal-title" ng-show="isNewTaskModal">Create new Cleaning Task</h3>
+		<h3 class="modal-title" ng-hide="isNewTaskModal">Visualize Cleaning Task</h3>
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<br>
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label for="taskName" class="col-sm-3 control-label">Task Name:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="taskName" placeholder="Please input the task name" ng-model="task.name" ng-readonly="!isNewTaskModal" >
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="sourceDB" class="col-sm-3 control-label">Source DB:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="sourceDB" value="raw_data_db" placeholder="raw_data_db" ng-model="task.sourceDb" ng-readonly="!isNewTaskModal || true" >
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="destinationDB" class="col-sm-3 control-label">Destination DB:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="destinationDB" placeholder="Please input the destination database name" ng-model="task.destinationDb" ng-readonly="!isNewTaskModal" >
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cleaningStrategy" class="col-sm-3 control-label">Cleaning Strategy:</label>
+				<div class="col-sm-9">
+					<input type="radio" class="radio-inline" id="cleaningStrategy" value="keywords" ng-model="task.cleaningStrategy" ng-disabled="!isNewTaskModal" >&nbsp;By Keywords
+					<input type="radio" class="radio-inline" value="topics" ng-model="task.cleaningStrategy" ng-disabled="!isNewTaskModal || true">&nbsp;By Topic Relevation
+				</div>
+			</div>
+			<div class="form-group" ng-show="task.cleaningStrategy == 'keywords'">
+				<label for="keywords" class="col-sm-3 control-label">Keywords:</label>
+				<div class="col-sm-9">
+					<textarea class="form-control" id="keywords" value="raw_data_db" placeholder="Keywords should be separate with space, use '&' to create combination. Example: 'word1 word2&word3'" ng-model="task.keywords" ng-readonly="!isNewTaskModal" ></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="taskType" class="col-sm-3 control-label">Task Type:</label>
+				<div class="col-sm-9">
+					<input type="radio" class="radio-inline" id="taskType" value="cyclic" ng-model="task.taskType" ng-disabled="!isNewTaskModal">&nbsp;Cyclic
+					<input type="radio" class="radio-inline" id="taskType1" value="template" ng-model="task.taskType" ng-disabled="!isNewTaskModal || true">&nbsp;Template
+				</div>
+			</div>
+			<div id="cycleTaskDiv" ng-show="task.taskType == 'cyclic'">
+				<div class="form-group">
+					<label for="cycleType" class="col-sm-3 control-label">Cycle Type:</label>
+					<div class="col-sm-9">
+						<input type="radio" class="radio-inline" id="cycleType" value="fixedInterval" ng-model="task.cycleType" ng-disabled="!isNewTaskModal">&nbsp;Fix Time Interval
+						<input type="radio" class="radio-inline" id="cycleType1" value="specificTime" ng-model="task.cycleType" ng-disabled="!isNewTaskModal">&nbsp;Specific Time
+					</div>
+				</div>
+				<div class="form-group" ng-show="task.cycleType == 'fixedInterval'">
+					<label for="fixTimeInterval" class="col-sm-3 control-label">Interval Minutes:</label>
+					<div class="col-sm-9">
+						<input type="number" class="form-control" id="fixTimeInterval" placeholder="Input the fix time interval minutes" ng-model="task.fixTimeInterval" ng-readonly="!isNewTaskModal" >
+					</div>
+				</div>
+				<div class="form-group" ng-show="task.cycleType == 'specificTime'">
+					<label for="specificTimes" class="col-sm-3 control-label">SpecificTime:</label>
+
+			        <div class="col-md-9">
+			            <div class="form-group row">
+			                <div class="col-md-4">
+			                	<div class="input-group">
+			                		<input type="number" class="form-control" value="0" ng-model="task.specificTime.h" ng-readonly="!isNewTaskModal" >
+			                		<div class="input-group-addon">hour</div>
+			                	</div>
+			                </div>
+			                <div class="col-md-4">
+			                	<div class="input-group">
+			                		<input type="number" class="form-control" value="0" ng-model="task.specificTime.m" ng-readonly="!isNewTaskModal" >
+			                		<div class="input-group-addon">min</div>
+			                	</div>
+			                </div>
+			                <div class="col-md-4">
+			                	<div class="input-group">
+			                		<input type="number" class="form-control" value="0" ng-model="task.specificTime.s" ng-readonly="!isNewTaskModal" >
+			                		<div class="input-group-addon">sec</div>
+			                	</div>
+			                </div>
+			            </div>
+			        </div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-lg btn-primary" ng-show="isNewTaskModal" type="button" ng-click="create()">Create & Start</button>
+		<button class="btn btn-lg btn-primary" ng-hide="isNewTaskModal" type="button" ng-click="close()">Close</button>
+	</div>
+</script>
+{% endraw %}

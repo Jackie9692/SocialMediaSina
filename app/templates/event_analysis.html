@@ -1,0 +1,33 @@
+{% raw %}
+<div ng-controller="EventAnalysisCtrl">
+	<h1 class="text-center"ng-show="event == undefined">
+		<br><br><br>
+		No results loaded yet...
+		<br><br><br>
+		<a class="btn btn-primary btn-lg" href="/#/search/search_event">Goto Search</a>
+	</h1>
+	<div ng-hide="event == undefined">
+		<div class="row">
+			<legend>Event</legend>
+			<div class="col-sm-8">
+				<div class="row">
+					<h3 class="col-sm-7"><span ng-bind-html="event.name | linkyWithHtml"></span></h3>
+					<h4 class="col-sm-5 text-right"><br><em>{{event.start_at}}, {{event.stop_at}}</em></h4>
+				</div>
+				<div class="row panel panel-default">
+					<div class="panel-body">
+						<p ng-bind-html="event.description | linkyWithHtml"></p>
+					</div>
+				</div>
+				<label>Keywords</label> {{event.keywords}}
+				<div class="text-right">
+					<a class="btn btn-primary" href="/#/search/status_list_visualisation" ng-click="search()">See Statuses</a>
+				</div>
+			</div>
+			<div class="col-sm-4 text-center">
+				<img src="/static/image/china.svg" class="img-responsive img-thumbnail" alt="Location">{{event.location}}
+			</div>
+		</div>
+	</div>
+</div>
+{% endraw %}
